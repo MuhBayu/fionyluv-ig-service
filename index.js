@@ -1,5 +1,5 @@
-require('dotenv').config()
 const cron = require('node-cron');
+require('dotenv').config()
 const redis = require("./util/Redis")
 const {promisify} = require('util');
 const redisExist = promisify(redis.client.exists).bind(redis.client);
