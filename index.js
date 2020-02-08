@@ -36,7 +36,7 @@ cron.schedule('* * * * *', async () => {
 			} catch (error) {
 				var caption = ""
 			}
-			current_timestamp = new Date(1578569722 * 1000)
+			current_timestamp = new Date(current_timestamp * 1000)
 			var data_to_send = {}
 			if (datesAreOnSameDay(taken_at_timestamp, current_timestamp)) {
 				var checkExist = await redisExist(`${OSHI_USERNAME}:${shortcode}`)
