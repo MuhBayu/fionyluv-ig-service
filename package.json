@@ -1,0 +1,17 @@
+{
+  "name": "fiontluv-ig-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "MuhBayu <bnugraha00@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "node-cron": "^2.0.3",
+    "redis": "^2.8.0",
+    "unirest": "^0.6.0"
+  }
+}
