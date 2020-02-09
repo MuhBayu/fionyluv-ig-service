@@ -24,7 +24,7 @@ const objectNotEmpty = (obj) => {
 
 cron.schedule('* * * * *', async () => {
 	console.log('running a task every minute');
-	(async() => {
+	// (async() => {
 		let Feed = await getFeed(OSHI_USERNAME)
 		let edges = Feed.graphql.user.edge_owner_to_timeline_media.edges
 		edges.forEach(async(element) => {
@@ -94,5 +94,5 @@ cron.schedule('* * * * *', async () => {
 				console.info(shortcode + " SKIPED")
 			}
 		})
-	})()
+	// })()
 });
