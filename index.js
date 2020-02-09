@@ -7,7 +7,8 @@ const {
     getFeed,
 	getMedia
  } = require('./service/insta')
- const {sendPush} = require('./service/fionyluv')
+const {sendPush} = require('./service/fionyluv')
+const fs = require('fs')
 
 const OSHI_USERNAME = process.env.OSHI_USERNAME
 
@@ -22,8 +23,8 @@ const objectNotEmpty = (obj) => {
 }
 
 
-cron.schedule('* * * * *', async () => {
-	console.log('running a task every minute');
+cron.schedule('*/10 * * * * *', async () => {
+	fs.appendFileSync('log.txt', "TASK [" + new Date().toLocaleString() + "]\n")
 	// (async() => {
 		let Feed = await getFeed(OSHI_USERNAME)
 		let edges = Feed.graphql.user.edge_owner_to_timeline_media.edges
@@ -87,12 +88,16 @@ cron.schedule('* * * * *', async () => {
 					send_push = await sendPush(data_to_send)
 					if(send_push) {
 						redis.client.setex(`${OSHI_USERNAME}:${shortcode}`, 86400, "OK")
-						console.info(shortcode + " SENT")
+						fs.appendFileSync('log.txt', shortcode + " SENT\n")
+					} else {
+						fs.appendFileSync('log.txt', shortcode + " FAILED SEND\n")
 					}
 				}
 			} else {
-				console.info(shortcode + " SKIPED")
+				fs.appendFileSync('log.txt', shortcode + " SKIPED\n")
 			}
 		})
 	// })()
 });
+
+console.log("Service running, CTRL+C to stop")
