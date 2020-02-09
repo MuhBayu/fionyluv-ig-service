@@ -23,7 +23,7 @@ const objectNotEmpty = (obj) => {
 }
 
 
-cron.schedule('*/10 * * * * *', async () => {
+cron.schedule('* * * * *', async () => {
 	fs.appendFileSync('log.txt', "TASK [" + new Date().toLocaleString() + "]\n")
 	// (async() => {
 		let Feed = await getFeed(OSHI_USERNAME)
